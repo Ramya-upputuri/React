@@ -1,6 +1,7 @@
 
 // import { useReducer } from 'react';
-import React, { useRef, useState } from 'react';
+// import React, { useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import './App.css';
 // import Class from './Class1';
 // import Title from './Title';
@@ -74,7 +75,6 @@ import './App.css';
 //   Cuisines : "Cuisines: italic,chinese,indian",
 //   Rating:"Rating:5star",
 // }
-
 // let Restaurent=(props)=>{
 //   return(
 //     <>
@@ -85,6 +85,8 @@ import './App.css';
 //     </>
 //   )
 // }
+
+
 
 // function App() {
 //   return (
@@ -108,10 +110,10 @@ import './App.css';
 // function App(){
 //   const[data,setData]=useState(10)
 //   const changeHandler=()=>{
-//     setData(data-1)
+//     setData(data-2)
 //   }
 //   const increaseHandler=()=>{
-//     setData(data+1)
+//     setData(data+2)
 //   }
 //   return(
 // <>
@@ -123,6 +125,7 @@ import './App.css';
 // }
 
 // use state example 
+// import some from './data';
 // function App(){
 //   const[data,setData]=useState(some)
 //   const delteHandler=(receveid)=>{
@@ -156,8 +159,10 @@ import './App.css';
 //   )
 //       }
       
+
 // useeffect
 // function App(){
+
 //   const URL ='https://jsonplaceholder.typicode.com/users'
 //    const [usersData,setusersData]=useState([])
     
@@ -274,7 +279,8 @@ import './App.css';
 // }
 
 // import Cocktail from './DrinksApp';
-// function App(){
+// import './DrinksApp.css';
+//   function App(){
 //     return(
 //       <>
 //         <Cocktail/>
@@ -282,28 +288,113 @@ import './App.css';
 //     )
 //   }
 
+//useMemo
+// function App(){
+//  const [count,setcount]=useState(0);
+//  const[Number,setNumber]=useState(20);
+//  const factorial=React.useMemo(()=>fact(Number),[Number])
+//  const handleChange=()=>{
+// setcount(count+1)
+//  }
+//   return(
+//     <>
+//     {factorial}
+//     <button onClick={handleChange}>Share</button>
+//     {count}
+//     </>
+//   )
+// }
+// const fact=(n)=>{
+//   let answer =1;
+//   for(var i=n;i>=1;i--){
+//     answer=answer*i
+//   }
+//   console.log("factorial called")
+//   return answer
+// }
 
-function App(){
- const [count,setcount]=useState(0);
- const[Number,setNumber]=useState(10);
- const factorial=React.useMemo(()=>fact(Number),[Number])
- const handleChange=()=>{
-setcount(count+1)
- }
-  return(
-    <>
-    {factorial}
-    <button onClick={handleChange}>Share</button>
-    {count}
-    </>
+// import Memo from './usememo';
+// function App(){
+//   return(
+//     <>
+//     <Memo/>
+//     </>
+//   )
+// }
+
+// UseCallback
+// import Button from './Button';
+// import Count from './Count';
+// function App(){
+//   const[age,setAge]=useState(0)
+//   const[salary,setSalary]=useState(7000)
+
+//   const increamentAge=useCallback(()=>{
+//    setAge(age+1)
+//   },[age])
+
+//   const increamentSalary=useCallback(()=>{
+//     setSalary(salary+1)
+//   },[salary])
+//   return(
+//     <center>
+//     <Count text={"age"} number={age}/>
+//     <Button clickHandler={increamentAge}>Increment Age</Button>
+//     <Count text={"salary"} number={salary}/>
+//     <Button clickHandler={increamentSalary}>Increment Salary</Button>
+//     </center>
+//   )
+// }
+
+
+// import Usersdata from './Task1';
+// function App(){
+//   return(
+//     <>
+//     <Usersdata/>
+//     </>
+//   )
+// }
+//   export default App;
+
+import React from 'react'
+import { Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import Contact from './Contact';
+import Service from './Service';
+import About from './About';
+import Pagenotfound from './Pagenotfound';
+import Navbar from './Navbar';
+import Success from './Success';
+import Restaurents from './Restaurents';
+import Existing from './Existing';
+import New from './New';
+import Products from './Products';
+import Productsview from './Productsview';
+// Install npm install react-router dom  
+function App () {
+  return (
+    <div className='App'>
+      
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<Home/>}>Home</Route>  
+        <Route path='/Contact' element={<Contact/>}>.....</Route>
+        <Route path='/Service' element={<Service/>}>Service</Route>
+        <Route path='/About' element={<About/>}>About</Route>
+        <Route path='*' element={<Pagenotfound/>}></Route>
+        <Route path='/Success' element={<Success/>}></Route>
+        <Route path='/Restaurents' element={<Restaurents/>}>
+          <Route index element={<Existing/>}></Route>
+          <Route path='Existing' element={<Existing/>}></Route>
+          <Route path='New' element={<New/>}></Route>
+          </Route>
+          <Route path='/Products' element={<Products/>}></Route>
+          <Route path='/Products/:id' element={<Productsview/>}></Route>
+      </Routes>
+    </div>
   )
 }
-const fact=(n)=>{
-  let answer =1;
-  for(var i=n;i>=1;i--){
-    answer=answer*i
-  }
-  console.log("factorial called")
-  return answer
-}
-  export default App;
+
+export default App
+

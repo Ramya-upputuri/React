@@ -1,3 +1,4 @@
+import'./DrinksApp.css';
 import React,{useState,useEffect} from "react";
 const URL="https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const Cocktail =()=>{
@@ -13,15 +14,20 @@ const Cocktail =()=>{
         setUserData(drinks)
         if(!drinks){
             throw new Error("Data not found")
-        }
-    }
+        }}
+
+        useEffect(()=>{
+            const correctURL =`${URL}${searchTerm}`
+            fetchData(correctURL)
+        },[searchTerm])
+    
 
     return(
         <>
         <div className="container">
-            <div className="parent">
-             <input type="text" placeholder="Search..." value={searchTerm} onChange={(e)=>setSearchterm(e.target.value)}/>
-            </div>
+            <div className="parent" >
+             <input type="text" id="one" placeholder="Search..." value={searchTerm} onChange={(e)=>setSearchterm(e.target.value)}/>
+            </ div>
             <hr/>
             {
             usersData.map((eachDrink)=>{
